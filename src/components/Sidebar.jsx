@@ -35,7 +35,7 @@ const Sidebar = () => {
   return (
     <aside className='w-1/10 bg-customBlue text-white flex flex-col items-center p-2'>
       {/* Logo */}
-      <img src={Logo} alt='Logo' className='mb-12 w-12 h-12 rounded-md' />
+      <img src={Logo} alt='Logo' className='mb-12 w-16 h-16 rounded-md' />
 
       {/* Navigation Links */}
       <nav className='flex flex-col space-y-2 flex-1 w-full mb-20'>

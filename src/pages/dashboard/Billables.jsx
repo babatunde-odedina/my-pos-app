@@ -53,7 +53,7 @@ const Billables = () => {
       <MiniTopbar />
       <FilterTopbar />
       <div className='flex flex-wrap mx-2'>
-        <div className='w-1/2 p-2'>
+        <div className='md:w-1/2 p-2'>
           <DisplayCard>
             <BarChart
               title='Top 10 Best Performance Items'
@@ -61,7 +61,7 @@ const Billables = () => {
             />
           </DisplayCard>
         </div>
-        <div className='w-1/2 mx-auto p-2'>
+        <div className='md:w-1/2 p-2'>
           <DisplayCard>
             <BarChart title='Slow Moving 10 Items' data={slowMovingData} />
           </DisplayCard>

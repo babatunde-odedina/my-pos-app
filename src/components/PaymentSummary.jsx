@@ -1,6 +1,6 @@
 const PaymentSummary = ({ colors }) => {
   return (
-    <div className='w-1/2  p-2 ml-5'>
+    <div className='md:w-1/2 p-4 md:ml-5 mx-auto'>
       <div className='mb-4'>
         <h3 className='text-textColor font-bold mb-2'>
           Debit Card Payments Breakdown

@@ -38,7 +38,7 @@ const Customers = () => {
           6.15% <small>than last week</small>{' '}
         </DisplayCard>
       </div>
-      <div className='w-2/3 px-4 mt-2 h-20'>
+      <div className='md:w-2/3 px-4 mt-2 h-20'>
         <DisplayCard>
           <BarChart
             title='Top 10 Customers (By transactions)'
