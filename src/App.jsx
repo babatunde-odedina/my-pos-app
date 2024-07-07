@@ -17,6 +17,7 @@ import ByCustomerReport from './pages/salesreport/ByCustomerReport';
 import ByEmployeeReport from './pages/salesreport/ByEmployeeReport';
 import ByCategoryReport from './pages/salesreport/ByCategoryReport';
 import ByProductReport from './pages/salesreport/ByProductReport';
+import MainBillables from './pages/billables/MainBillables';
 
 function App() {
   return (
@@ -36,6 +37,15 @@ function App() {
         <Route path='/home/sales-report' element={<Dashboard />}>
           <Route path='' element={<Navigate to='general' />} />
           <Route path='general' element={<SalesReportGeneral />} />
+          <Route path='payment-type' element={<PaymentTypeReport />} />
+          <Route path='by-customer' element={<ByCustomerReport />} />
+          <Route path='by-employee' element={<ByEmployeeReport />} />
+          <Route path='by-category' element={<ByCategoryReport />} />
+          <Route path='by-product' element={<ByProductReport />} />
+        </Route>
+        <Route path='/billables' element={<Dashboard />}>
+          <Route path='' element={<Navigate to='attractions' />} />
+          <Route path='attractions' element={<MainBillables />} />
           <Route path='payment-type' element={<PaymentTypeReport />} />
           <Route path='by-customer' element={<ByCustomerReport />} />
           <Route path='by-employee' element={<ByEmployeeReport />} />
