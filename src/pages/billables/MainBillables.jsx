@@ -16,7 +16,7 @@ import Modal from 'react-modal';
 import PaymentOption from '../../components/PaymentOption';
 import { AiOutlineClose } from 'react-icons/ai';
 
-// Set the root element for the modal
+Modal.setAppElement('#root');
 
 const items = [
   {
@@ -266,6 +266,12 @@ const MainBillables = () => {
     setSelectedPayment(null);
   };
 
+  const getButtonClasses = (paymentMethod) => {
+    return `flex flex-col items-center bg-customBlue bg-opacity-10 p-4 rounded-lg cursor-pointer hover:border-customBlue border-2 w-1/4 ${
+      selectedPayment === paymentMethod ? 'border-customBlue' : ''
+    }`;
+  };
+
   return (
     <div className='flex h-screen px-3'>
       {/* Modal */}
@@ -273,19 +279,24 @@ const MainBillables = () => {
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         className='flex justify-center items-center rounded-lg'
-        overlayClassName='fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center'
+        overlayClassName='fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-30'
         contentLabel='Payment Modal'
       >
-        <div className='bg-white p-6 rounded-lg shadow-lg max-w-lg w-full'>
-          <div className='flex justify-between items-center'>
-            <h2 className='text-2xl font-semibold'>Select a POS Bank</h2>
+        <div className='bg-white p-8 rounded-lg shadow-lg max-w-lg w-full'>
+          <div className='flex justify-between items-center mb-6'>
+            {selectedPayment === 'card' && (
+              <h2 className='text-2xl font-semibold'>Select a POS Bank</h2>
+            )}
+            {selectedPayment === 'bank transfer' && (
+              <h2 className='text-2xl font-semibold'>Select a Bank</h2>
+            )}
             <AiOutlineClose
               className='cursor-pointer ml-10'
               onClick={closeModal}
             />
           </div>
           <div className='mt-4'>
-            <label htmlFor='bank' className='block text-lg font-semibold'>
+            <label htmlFor='bank' className='block text-lg'>
               Select Bank
             </label>
             <select
@@ -585,18 +596,38 @@ const MainBillables = () => {
               <p className='text-lg font-semibold'>{rewardPoints} pts</p>
             </div>
             <hr />
-            <div className='flex justify-between'>
-              <p className='text-lg'>Link Account</p>
-              <span className=''>
-                <button className='bg-customBlue text-white p-2 rounded-lg'>
-                  Register
-                </button>
-                <button className='bg-customBlue text-white p-2 rounded-lg ml-4'>
-                  Link Account
-                </button>
-              </span>
-            </div>
-            <hr />
+
+            {selectedPayment === 'max credit' ? (
+              <>
+                <div className='flex justify-between'>
+                  <p className='text-lg'>Access Wallet</p>
+                  <span className=''>
+                    <button className='bg-customBlue text-white p-2 rounded-lg'>
+                      Scan ID
+                    </button>
+                    <button className='bg-customBlue text-white p-2 rounded-lg ml-4'>
+                      Enter ID
+                    </button>
+                  </span>
+                </div>
+                <hr />
+              </>
+            ) : (
+              <>
+                <div className='flex justify-between'>
+                  <p className='text-lg'>Link Account</p>
+                  <span className=''>
+                    <button className='bg-customBlue text-white p-2 rounded-lg'>
+                      Register
+                    </button>
+                    <button className='bg-customBlue text-white p-2 rounded-lg ml-4'>
+                      Link Account
+                    </button>
+                  </span>
+                </div>
+                <hr />
+              </>
+            )}
             <div>
               <h3 className='text-lg font-semibold'>Payment Method</h3>
             </div>
@@ -619,14 +650,13 @@ const MainBillables = () => {
                 icon={<BsBank className='text-customBlue text-4xl' />}
                 text='Bank Transfer'
               />
-              <PaymentOption
-                selectedPayment={selectedPayment}
-                handlePaymentClick={handlePaymentClick}
-                icon={
-                  <AiOutlineCreditCard className='text-customBlue text-4xl' />
-                }
-                text='Max Credit'
-              />
+              <div
+                className={getButtonClasses('max credit')}
+                onClick={() => handlePaymentClick('max credit')}
+              >
+                <span className='text-customBlue text-4xl'>MC</span>
+                <p className='text-black mt-2 font-semibold'>Max Credit</p>
+              </div>
             </div>
             <div className='flex justify-between mt-6'>
               <button className='bg-customBlue bg-opacity-10 text-black w-1/2 p-4 rounded-lg mr-2'>
