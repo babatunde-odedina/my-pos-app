@@ -30,7 +30,7 @@ const Dashboard = () => {
       </header>
       {/* Main Content */}
       <div
-        className={`flex-1 overflow-auto mt-16 ml-0 md:ml-[8.3%] ${
+        className={`flex-1 overflow-auto mt-12 ml-0 md:ml-[8.3%] ${
           isSidebarOpen && 'overflow-hidden'
         }`}
       >
