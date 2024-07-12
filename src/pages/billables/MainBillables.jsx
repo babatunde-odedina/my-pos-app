@@ -4,17 +4,16 @@ import { TbBrandAppleArcade } from 'react-icons/tb';
 import { ImSpoonKnife } from 'react-icons/im';
 import { SlHandbag } from 'react-icons/sl';
 import { MdOutlineEventAvailable } from 'react-icons/md';
-import { AiOutlineCreditCard, AiOutlineProduct } from 'react-icons/ai';
+import { AiOutlineProduct } from 'react-icons/ai';
 import { CiGrid2H } from 'react-icons/ci';
 import { BsGrid3X3Gap } from 'react-icons/bs';
 import { TiPlusOutline, TiMinusOutline } from 'react-icons/ti';
 import { GoTrash } from 'react-icons/go';
-import { FaMoneyBillAlt } from 'react-icons/fa';
+import { FaMoneyBillAlt, FaTimes } from 'react-icons/fa';
 import { CiCreditCard1 } from 'react-icons/ci';
 import { BsBank } from 'react-icons/bs';
 import Modal from 'react-modal';
 import PaymentOption from '../../components/PaymentOption';
-import { AiOutlineClose } from 'react-icons/ai';
 
 Modal.setAppElement('#root');
 
@@ -185,6 +184,13 @@ const MainBillables = () => {
   const [selectedPayment, setSelectedPayment] = useState(null);
   const [selectedBank, setSelectedBank] = useState('');
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [isEnteringId, setIsEnteringId] = useState(false);
+  const [enteredId, setEnteredId] = useState('');
 
   const banks = ['Bank A', 'Bank B', 'Bank C']; // Example bank options
 
@@ -272,6 +278,15 @@ const MainBillables = () => {
     }`;
   };
 
+  const openRegisterModal = () => setIsRegisterModalOpen(true);
+  const closeRegisterModal = () => setIsRegisterModalOpen(false);
+
+  const handleRegister = () => {
+    // Handle the registration logic here
+    console.log({ firstName, lastName, email, phone });
+    closeRegisterModal();
+  };
+
   return (
     <div className='flex h-screen px-3'>
       {/* Modal */}
@@ -290,8 +305,8 @@ const MainBillables = () => {
             {selectedPayment === 'bank transfer' && (
               <h2 className='text-2xl font-semibold'>Select a Bank</h2>
             )}
-            <AiOutlineClose
-              className='cursor-pointer ml-10'
+            <FaTimes
+              className='cursor-pointer ml-20 mb-3'
               onClick={closeModal}
             />
           </div>
@@ -320,6 +335,78 @@ const MainBillables = () => {
           >
             Complete
           </button>
+        </div>
+      </Modal>
+
+      <Modal
+        isOpen={isRegisterModalOpen}
+        onRequestClose={closeRegisterModal}
+        contentLabel='Customer Registration'
+        className='flex justify-center items-center rounded-lg'
+        overlayClassName='fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-30'
+      >
+        <div className='bg-white p-8 rounded-lg shadow-lg w-full max-w-md'>
+          <div className='flex justify-between items-center mb-6'>
+            <h2 className='text-2xl font-semibold mb-4'>
+              Customer Registration
+            </h2>
+            <FaTimes
+              className='cursor-pointer ml-20 mb-3'
+              onClick={closeModal}
+            />
+          </div>
+          <div className='space-y-4'>
+            <div>
+              <label className='block text-sm font-medium text-gray-700'>
+                First Name
+              </label>
+              <input
+                type='text'
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                className='w-full p-2 border rounded mt-1'
+              />
+            </div>
+            <div>
+              <label className='block text-sm font-medium text-gray-700'>
+                Last Name
+              </label>
+              <input
+                type='text'
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                className='w-full p-2 border rounded mt-1'
+              />
+            </div>
+            <div>
+              <label className='block text-sm font-medium text-gray-700'>
+                Email
+              </label>
+              <input
+                type='email'
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className='w-full p-2 border rounded mt-1'
+              />
+            </div>
+            <div>
+              <label className='block text-sm font-medium text-gray-700'>
+                Phone Number <small className='text-gray-400'>(Optional)</small> 
+              </label>
+              <input
+                type='tel'
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                className='w-full p-2 border rounded mt-1'
+              />
+            </div>
+            <button
+              className='bg-customBlue text-white w-full py-2 rounded-lg mt-4'
+              onClick={handleRegister}
+            >
+              Register
+            </button>
+          </div>
         </div>
       </Modal>
 
@@ -602,12 +689,38 @@ const MainBillables = () => {
                 <div className='flex justify-between'>
                   <p className='text-lg'>Access Wallet</p>
                   <span className=''>
-                    <button className='bg-customBlue text-white p-2 rounded-lg'>
-                      Scan ID
-                    </button>
-                    <button className='bg-customBlue text-white p-2 rounded-lg ml-4'>
-                      Enter ID
-                    </button>
+                    {!isEnteringId ? (
+                      <>
+                        <button className='bg-customBlue text-white p-2 rounded-lg'>
+                          Scan ID
+                        </button>
+                        <button
+                          className='bg-customBlue text-white p-2 rounded-lg ml-4'
+                          onClick={() => setIsEnteringId(true)}
+                        >
+                          Enter ID
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <input
+                          type='text'
+                          value={enteredId}
+                          onChange={(e) => setEnteredId(e.target.value)}
+                          className='border p-2 rounded-lg'
+                          placeholder='Enter ID'
+                        />
+                        <button
+                          className='bg-customBlue text-white p-2 rounded-lg ml-4'
+                          onClick={() => {
+                            // Handle find ID logic here
+                            console.log(`Finding ID: ${enteredId}`);
+                          }}
+                        >
+                          Find
+                        </button>
+                      </>
+                    )}
                   </span>
                 </div>
                 <hr />
@@ -617,7 +730,10 @@ const MainBillables = () => {
                 <div className='flex justify-between'>
                   <p className='text-lg'>Link Account</p>
                   <span className=''>
-                    <button className='bg-customBlue text-white p-2 rounded-lg'>
+                    <button
+                      className='bg-customBlue text-white p-2 rounded-lg'
+                      onClick={openRegisterModal}
+                    >
                       Register
                     </button>
                     <button className='bg-customBlue text-white p-2 rounded-lg ml-4'>

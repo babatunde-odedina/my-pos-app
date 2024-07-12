@@ -44,13 +44,10 @@ function App() {
           <Route path='by-product' element={<ByProductReport />} />
         </Route>
         <Route path='/billables' element={<Dashboard />}>
-          <Route path='' element={<Navigate to='attractions' />} />
-          <Route path='attractions' element={<MainBillables />} />
-          <Route path='payment-type' element={<PaymentTypeReport />} />
-          <Route path='by-customer' element={<ByCustomerReport />} />
-          <Route path='by-employee' element={<ByEmployeeReport />} />
-          <Route path='by-category' element={<ByCategoryReport />} />
-          <Route path='by-product' element={<ByProductReport />} />
+          <Route path='' element={<MainBillables />} />
+        </Route>
+        <Route path='/history' element={<Dashboard />}>
+          <Route path='' element={<MainBillables />} />
         </Route>
       </Routes>
     </Router>
