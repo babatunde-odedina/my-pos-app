@@ -19,7 +19,8 @@ import ByCategoryReport from './pages/salesreport/ByCategoryReport';
 import ByProductReport from './pages/salesreport/ByProductReport';
 import MainBillables from './pages/billables/MainBillables';
 import OrderHistory from './pages/history/OrderHistory';
-import RewardsHistory from './pages/history/RewardsHistory';
+import RewardsPage from './pages/rewards/RewardsPage';
+import CustomersList from './pages/customers/CustomersList';
 
 function App() {
   return (
@@ -49,9 +50,13 @@ function App() {
           <Route path='' element={<MainBillables />} />
         </Route>
         <Route path='/history' element={<Dashboard />}>
-        <Route path='' element={<Navigate to='billables' />} />
-          <Route path='billables' element={<OrderHistory />} />
-          <Route path='rewards' element={<RewardsHistory />} />
+          <Route path='' element={<OrderHistory />} />
+        </Route>
+        <Route path='/rewards' element={<Dashboard />}>
+          <Route path='' element={<RewardsPage />} />
+        </Route>
+        <Route path='/customers' element={<Dashboard />}>
+          <Route path='' element={<CustomersList />} />
         </Route>
       </Routes>
     </Router>

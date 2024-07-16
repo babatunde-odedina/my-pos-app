@@ -391,7 +391,7 @@ const MainBillables = () => {
             </div>
             <div>
               <label className='block text-sm font-medium text-gray-700'>
-                Phone Number <small className='text-gray-400'>(Optional)</small> 
+                Phone Number <small className='text-gray-400'>(Optional)</small>
               </label>
               <input
                 type='tel'
@@ -411,7 +411,7 @@ const MainBillables = () => {
       </Modal>
 
       {/* Category Selection - 60% Width */}
-      <div className='w-full md:w-3/5 p-4 rounded-lg'>
+      <div className='w-full md:w-6/5 p-4 rounded-lg'>
         <div className='flex justify-between items-center mb-4'>
           <h2 className='text-2xl font-semibold'>Choose Category</h2>
           <input
@@ -451,7 +451,7 @@ const MainBillables = () => {
         </div>
 
         {/* Items List */}
-        <div className='overflow-y-auto max-h-[600px]'>
+        <div className=''>
           <div className='flex justify-between items-center mt-4'>
             <h3 className='text-xl font-semibold'>{activeCategory} List</h3>
             <div className='flex justify-end items-center'>
@@ -468,7 +468,7 @@ const MainBillables = () => {
             </div>
           </div>
 
-          <div className='mt-4'>
+          <div className='mt-4 overflow-y-auto max-h-[500px]'>
             {view === 'grid' ? (
               <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4'>
                 {items
@@ -632,7 +632,7 @@ const MainBillables = () => {
               ) : (
                 <p className=''>
                   <button
-                    className='bg-customBlue text-white p-2 rounded-lg'
+                    className='bg-customBlue text-sm text-white p-2 rounded-lg'
                     onClick={() => setIsAddingDiscount(true)}
                   >
                     Add

@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { FaTimesCircle } from 'react-icons/fa';
-import { NavLink } from 'react-router-dom';
 
-const OrderHistory = () => {
+const OrderAndRewardsHistory = () => {
   const [location, setLocation] = useState('');
   const [adminUser, setAdminUser] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedOrder, setSelectedOrder] = useState(null);
+  const [view, setView] = useState('order'); // 'order' or 'rewards'
 
   const locations = ['Location 1', 'Location 2', 'Location 3']; // Example locations
   const adminUsers = ['Admin 1', 'Admin 2', 'Admin 3']; // Example admin users
@@ -42,30 +42,26 @@ const OrderHistory = () => {
         <h1 className='text-3xl font-semibold mb-6'>Order History</h1>
         <div className='flex justify-between items-center mb-6'>
           <div className='mb-2 sm:mb-0 flex flex-wrap items-left bg-gray-100'>
-            <NavLink
-              to='/History/billables'
-              className={({ isActive }) =>
-                `px-3 py-1 rounded ${
-                  isActive
-                    ? 'text-customBlue bg-customBlue bg-opacity-10 mr-6 mb-2 sm:mb-0'
-                    : 'text-gray-600 hover:text-customBlue hover:bg-customBlue hover:bg-opacity-10 mr-6 mb-2 sm:mb-0'
-                }`
-              }
+            <button
+              onClick={() => setView('order')}
+              className={`px-3 py-1 rounded ${
+                view === 'order'
+                  ? 'text-customBlue bg-customBlue bg-opacity-10 mr-6 mb-2 sm:mb-0'
+                  : 'text-gray-600 hover:text-customBlue hover:bg-customBlue hover:bg-opacity-10 mr-6 mb-2 sm:mb-0'
+              }`}
             >
               Billables
-            </NavLink>
-            <NavLink
-              to='/history/rewards'
-              className={({ isActive }) =>
-                `px-3 py-1 rounded ${
-                  isActive
-                    ? 'text-customBlue bg-customBlue bg-opacity-10 mr-6 mb-2 sm:mb-0'
-                    : 'text-gray-600 hover:text-customBlue hover:bg-customBlue hover:bg-opacity-10 mr-6 mb-2 sm:mb-0'
-                }`
-              }
+            </button>
+            <button
+              onClick={() => setView('rewards')}
+              className={`px-3 py-1 rounded ${
+                view === 'rewards'
+                  ? 'text-customBlue bg-customBlue bg-opacity-10 mr-6 mb-2 sm:mb-0'
+                  : 'text-gray-600 hover:text-customBlue hover:bg-customBlue hover:bg-opacity-10 mr-6 mb-2 sm:mb-0'
+              }`}
             >
               Rewards
-            </NavLink>
+            </button>
           </div>
         </div>
         <div className='flex space-x-4 items-center justify-between mb-6'>
@@ -215,21 +211,13 @@ const OrderHistory = () => {
             </table>
           </div>
           <div className='mb-4'>
-            <div className='flex justify-between pr-20 pl-3'>
-              <div className='text-lg font-semibold'>Total</div>
-              <div className='flex space-x-20'>
-                <div>MC 12,600</div>
-                <div>N6,300</div>
-              </div>
-            </div>
+            <h3 className='text-lg font-semibold'>Order Time</h3>
+            <p>{selectedOrder.timeStamp}</p>
           </div>
-          <button className='bg-btnSecColor text-white p-2 rounded-lg mt-10'>
-            Print Order
-          </button>
         </div>
       )}
     </div>
   );
 };
 
-export default OrderHistory;
+export default OrderAndRewardsHistory;
